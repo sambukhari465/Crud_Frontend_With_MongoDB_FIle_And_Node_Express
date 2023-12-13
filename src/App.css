@@ -205,3 +205,42 @@ tbody button{
   color: #f16353;
   text-decoration: none;
 }
+
+.showtable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c9dadf;
+  border-radius: 30px;
+  color: #fff;
+  width: 50%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  display: flex;
+
+}
+
+li {
+  border: none;
+  border-radius: 30px;
+  padding: 10px 35px;
+  color: white;
+  background-color: #ff742f;
+  font-size: 15px;
+  margin-right: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  transition: .3s;
+}
+
+li a{
+  text-decoration: none;
+  color: inherit; 
+}

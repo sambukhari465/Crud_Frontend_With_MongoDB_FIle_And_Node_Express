@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logout from "./Logout";
 
@@ -28,6 +28,7 @@ function LoginForm() {
     formData.append("password", user.password);
     formData.append("age", user.age);
     formData.append("image", user.image);
+    formData.append("auth", localStorage.getItem("token"))
 
     axios
       .post("http://localhost:4006/create", formData)
@@ -39,43 +40,16 @@ function LoginForm() {
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const getAllData = () => {
-    axios
-      .get("http://localhost:4006")
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  };
-
-  const deleteUser = (id) => {
-    axios
-      .delete(`http://localhost:4006/delete/${id}`)
-      .then(() => {
-        alert("Data deleted");
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  };
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/");
     }
-    getAllData();
-    if (location.state && location.state.data1) {
-      setUser(location.state.data1);
-    }
-  }, [data, location.state, navigate]);
+  }, [data,  navigate]);
 
   return (
-    <div>
       <div className="main">
         <div className="form">
           <div className="detail">
@@ -129,56 +103,6 @@ function LoginForm() {
           </div>
         </div>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Age</th>
-            <th>Image</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data &&
-            data?.map((item) => {
-              return (
-                <tr key={item._id}>
-                  <td>{item.name}</td>
-                  <td>{item.email}</td>
-                  <td>{item.password}</td>
-                  <td>{item.age}</td>
-                  <td>{item.image}</td>
-                  <td>
-                    <Link
-                      to="/update"
-                      state={{
-                        data1: {
-                          id: item._id,
-                          name: item.name,
-                          email: item.email,
-                          password: item.password,
-                          age: item.age,
-                          image: item.image,
-                        },
-                      }}
-                    >
-                      <button>Edit</button>
-                    </Link>
-                    <button onClick={() => deleteUser(item._id)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
-      <div>
-        <Logout />
-      </div>
-    </div>
   );
 }
 

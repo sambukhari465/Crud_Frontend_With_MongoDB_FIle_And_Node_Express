@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
-function Signup({ onUserData }) {
+function Signup() {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
@@ -17,14 +17,13 @@ function Signup({ onUserData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     axios
       .post("http://localhost:4006/signup", user)
       .then((res) => {
         console.log("res", res.data);
-        if (res.data === "res user already exist") {
+        if (res.data === "user already exist") {
           alert("User already exists. Please use a different email.");
-          navigate("signup");
         } else {
           navigate("/");
         }
@@ -33,21 +32,20 @@ function Signup({ onUserData }) {
         console.log(err);
       });
   };
-  
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/loginform");
+    }
+  }, [navigate]);
+
   return (
     <div className="bodyclass">
       <div className="mainclass">
         <div className="leftclass">
           <h1>Company Name</h1>
           <h4>A company to fulfill Your Dreams.</h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
-            officiis et ut distinctio cum perspiciatis. Cum quidem, asperiores
-            minima eveniet optio sed possimus quisquam vitae. <br />
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
-            officiis et ut distinctio cum perspiciatis. Cum quidem, asperiores
-            minima eveniet optio sed possimus quisquam vitae.
-          </p>
         </div>
         <div className="rightclass">
           <h1>Sign up</h1>
