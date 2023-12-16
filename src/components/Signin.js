@@ -15,12 +15,7 @@
 
   
 
-    useEffect(() => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        navigate("/loginform");
-      }
-    }, [navigate]);
+    
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -31,17 +26,23 @@
             alert("User not found. Please enter the correct email.");
           } else {
             localStorage.setItem("token", res.data.token);
-            navigate("/loginform");
+            navigate("/viewList");
           }
         })
         .catch((err) => {
           console.log(err);
         });
     };
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        navigate("/viewList");
+      }
+    }, [navigate]);
 
     return (
       <div className="bodyclass">
-        <div className="mainclass">
+        <div className="mainclass" id="signinclass">
           <div className="leftclass">
             <h1>Company Name</h1>
           </div>
@@ -64,7 +65,7 @@
                 value={user.password}
                 onChange={handleChange}
               />
-              <button type="submit">Sign In</button>
+              <button type="submit">SignIn</button>
             </form>
             <p>
               Already have an account? <Link to="/signup">Sign Up here</Link>

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {  useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Logout from "./Logout";
 
 function LoginForm() {
-  const [data, setData] = useState([]);
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -13,13 +11,13 @@ function LoginForm() {
     image: null,
   });
 
-  const location = useLocation();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
-
+  const local = localStorage.getItem("token")
+  console.log(typeof(local),local)
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -28,18 +26,25 @@ function LoginForm() {
     formData.append("password", user.password);
     formData.append("age", user.age);
     formData.append("image", user.image);
-    formData.append("auth", localStorage.getItem("token"))
-
+    formData.append("auth", local)
+    console.log(formData)
     axios
-      .post("http://localhost:4006/create", formData)
+      .post("http://localhost:4006/create", formData,{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `${local}`
+        }})
       .then((res) => {
         if (res.data === "user already exist") {
           alert("User already exists. Please use a different email.");
+        }else {
+          navigate("/viewList");
         }
       })
       .catch((err) => {
         console.log(err);
       });
+      
   }
 
   useEffect(() => {
@@ -47,7 +52,7 @@ function LoginForm() {
     if (!token) {
       navigate("/");
     }
-  }, [data,  navigate]);
+  }, [navigate]);
 
   return (
       <div className="main">

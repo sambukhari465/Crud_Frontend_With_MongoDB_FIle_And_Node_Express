@@ -36,13 +36,13 @@ function Signup() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      navigate("/loginform");
+      navigate("/viewList");
     }
   }, [navigate]);
 
   return (
     <div className="bodyclass">
-      <div className="mainclass">
+      <div className="mainclass" id="signupclss">
         <div className="leftclass">
           <h1>Company Name</h1>
           <h4>A company to fulfill Your Dreams.</h4>
@@ -82,7 +82,7 @@ function Signup() {
               value={user.age}
               onChange={handleChange}
             />
-            <button type="submit">Sign Up</button>
+            <button type="submit">SignUp</button>
           </form>
           <p>
             Already have an account?{" "}
@@ -93,5 +93,4 @@ function Signup() {
     </div>
   );
 }
-
 export default Signup;

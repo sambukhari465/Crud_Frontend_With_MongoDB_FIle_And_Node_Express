@@ -38,7 +38,7 @@ function Update() {
       .put(`http://localhost:4006/update/${updateUser.id}`, formData)
       .then((res) => {
         console.log("res", res);
-        navigate("/");
+        navigate("/viewList");
       })
       .catch((err) => {
         console.log(err);
@@ -99,5 +99,4 @@ function Update() {
     </div>
   );
 }
-
 export default Update;

@@ -127,10 +127,17 @@ tbody button{
 }
 .bodyclas{
   padding: 50px 4%;
+ 
 }
 .mainclass{
   display: flex;
   box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.192);
+}
+#signinclass{
+ margin-top: 80px;
+}
+#signupclss{
+  margin-top: 20px;
 }
 .leftclass{
   width: 50%;
@@ -213,7 +220,7 @@ tbody button{
   background-color: #c9dadf;
   border-radius: 30px;
   color: #fff;
-  width: 50%;
+  width: 60%;
   margin: auto;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -234,7 +241,7 @@ li {
   color: white;
   background-color: #ff742f;
   font-size: 15px;
-  margin-right: 5px;
+  margin-right: 12px;
   margin-top: 15px;
   margin-bottom: 15px;
   transition: .3s;
@@ -243,4 +250,17 @@ li {
 li a{
   text-decoration: none;
   color: inherit; 
+}
+
+.tab button{
+  border: none;
+  border-radius: 30px;
+  padding: 10px 25px;
+  color: white;
+  background-color: #ff742f;
+  font-size: 15px;
+  margin-top: 15px;
+  margin-left: 10px;
+  transition: .3s;
+  cursor: pointer;
 }
