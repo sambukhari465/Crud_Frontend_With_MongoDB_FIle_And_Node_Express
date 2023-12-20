@@ -17,7 +17,6 @@ function LoginForm() {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   const local = localStorage.getItem("token")
-  console.log(typeof(local),local)
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -27,7 +26,7 @@ function LoginForm() {
     formData.append("age", user.age);
     formData.append("image", user.image);
     formData.append("auth", local)
-    console.log(formData)
+    // console.log(formData)
     axios
       .post("http://localhost:4006/create", formData,{
         headers: {

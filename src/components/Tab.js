@@ -44,7 +44,7 @@ function Tab() {
     } else {
       getAllData();
     }
-  });
+  },[navigate]);
 
   const handleLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to logout?");
@@ -81,13 +81,15 @@ function Tab() {
         </thead>
         <tbody>
           {data &&
-            data?.map((item) => (
+            data?.map((item) => 
+            (
               <tr key={item._id}>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.password}</td>
                 <td>{item.age}</td>
                 <td>{item.image}</td>
+                
                 <td>
                   <Link
                     to="/update"
